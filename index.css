@@ -1,0 +1,926 @@
+html {
+    background: url(media/monterey_dark.jpg) no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    user-select: none;
+
+}
+
+
+#loading-screen,
+#bootup-screen {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 24px);
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    color: #fefefe
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+#game-app.active,
+#terminal-app.active,
+#about-me-app.active,
+#safari-app.active {
+    animation: fadeIn 2s forwards;
+    visibility: visible;
+}
+
+
+/* Adjust loading desktop time */
+body.active {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#top-bar {
+    height: 24px;
+    top: 0;
+    background-color: #fffbfb27;
+    color: white;
+    cursor: default;
+}
+
+#top-bar-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+#top-bar-items>div {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-weight: 500;
+    height: 100%;
+}
+
+#top-bar-right>div>* {
+    padding: 0 10px
+}
+
+#top-bar-left #icon {
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+#top-bar-left>div+ :not(#app-name) {
+    padding: 0 8px;
+}
+
+#top-bar-left>#file-label {
+    padding-left: 0px;
+}
+
+#battery {
+    font-size: 20px;
+}
+
+#app-name {
+    font-weight: bold;
+    position: relative;
+}
+
+#app-name-display {
+    padding: 3px 20px;
+    border-radius: 6px;
+
+}
+
+#search,
+#wifi {
+    font-size: 14px;
+}
+
+#apple-logo {
+    font-size: 100px;
+    color: white;
+}
+
+#loading-bar {
+    position: relative;
+    height: 10px;
+    width: 200px;
+}
+
+#loading-bar-background {
+    background-color: #252525;
+    position: absolute;
+    width: 200px;
+    height: 8px;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: 2px #3a3a3a solid;
+}
+
+#loading-progress.active {
+    position: absolute;
+    width: 0;
+    background-color: #cecece;
+    width: 198px;
+    height: 8px;
+    margin-left: 2px;
+    margin-top: 52px;
+    border-radius: 10px;
+
+    animation: loadingAnimation 5s 1 linear;
+    z-index: 2;
+}
+
+@keyframes loadingAnimation {
+    0% {
+        width: 0%;
+    }
+
+    25% {
+        width: 50%;
+    }
+
+    50% {
+        width: 75%;
+    }
+
+    75% {
+        width: 85%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+
+.black-background {
+    background-color: black !important;
+    z-index: 10;
+    color: black !important;
+}
+
+/* Dock */
+#dock {
+    position: absolute;
+    bottom: 1px;
+    width: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 60px;
+    border-radius: 15px;
+    margin-bottom: 2px;
+    padding-bottom: 5px;
+    background-color: #fffbfb27;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Control size of dock icons */
+#dock img {
+    height: 50px;
+    transition: transform .2s;
+    position: relative;
+}
+
+#dock img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#game-icon img {
+    height: 42px;
+    margin: 4px 0;
+}
+
+#dock>div {
+    display: flex;
+    padding: 0 5px;
+    position: relative;
+}
+
+
+.app-open::after {
+    content: "";
+    position: absolute;
+    line-height: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #cecece;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Power button hover animation */
+.power-background {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    color: white;
+    font-size: 100px;
+    background: linear-gradient(180deg, white, white 50%, limegreen 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 100% 200%;
+    background-position: 0% 0%;
+    transition: background-position 500ms ease-out;
+}
+
+.power-background:hover {
+    background-position: 50% 100%;
+    cursor: pointer;
+}
+
+.power-background {
+    width: 100px;
+}
+
+
+#terminal-app,
+#about-me-app {
+    position: absolute;
+    width: 40vw;
+    height: 60vh;
+    background-color: rgb(23, 23, 23);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    border: 1px rgb(90, 85, 94) solid;
+    visibility: hidden;
+
+}
+
+#terminal-app {
+    user-select: text;
+}
+
+#about-me-app {
+    width: 60vw;
+    height: 80vh;
+    background-color: rgb(34, 29, 40);
+    top: 47%;
+    left: 50%;
+}
+
+/* DEBUG ONLY */
+/* #about-me-app {
+    visibility: visible;
+} */
+
+#game-app,
+#safari-app {
+    top: 24px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    bottom: 70px;
+    background-color: rgb(23, 23, 23);
+    border: 1px rgb(90, 85, 94) solid;
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#terminal-top-bar,
+#about-me-top-bar {
+    width: 100%;
+    background-color: rgb(42, 39, 46);
+    height: 24px;
+    display: flex;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+}
+
+#about-me-top-bar {
+    background-color: rgb(43, 38, 49);
+}
+
+#about-me-top-bar {
+    height: 35px;
+}
+
+#about-me-window {
+    height: 100%;
+}
+
+#about-me-window>div {
+    height: calc(100%-35px);
+}
+
+#terminal-window-name,
+#about-me-window-name {
+    color: rgb(178, 175, 182);
+    font-weight: bold;
+    letter-spacing: 0.1px;
+    font-size: 14px;
+    margin: 0 3px;
+    line-height: 14px;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+
+}
+
+#about-me-window-name>div {
+    padding: 4px 10px;
+    border: 1px #3a3a3a solid;
+    background-color: rgb(34, 29, 40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 200;
+}
+
+#about-me-window-name:first-child {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#about-me-window-name:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#about-me-window-name>div:hover,
+#about-me-window-name>div.active {
+    background-color: rgb(94, 91, 99);
+    border-radius: 5px;
+    color: white;
+}
+
+
+#terminal-top-left,
+#about-me-top-left {
+    display: flex;
+    position: absolute;
+}
+
+#terminal-top-center,
+#about-me-top-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    margin: 0 60px;
+}
+
+/* App window buttons close, minimise, expand*/
+#terminal-top-left>div,
+#about-me-top-left>div {
+    border-radius: 12px;
+    width: 12px;
+    height: 12px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.6);
+    position: relative;
+
+}
+
+#terminal-top-left,
+#about-me-top-left {
+    margin-left: 6px;
+}
+
+#overview-content {
+    display: flex;
+    justify-content: space-between;
+    height: calc(80vh - 35px);
+    width: 100%;
+
+}
+
+
+#overview-img {
+    flex: 1;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#img-container>img {
+    width: 120%;
+    border-radius: 50%;
+    border: 10px white solid;
+}
+
+#img-container {
+    width: 70%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 260px;
+    padding-left: 2rem;
+}
+
+#overview-text {
+    flex: 1.4;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+    flex-direction: column;
+    margin-bottom: 10%;
+}
+
+#overview-text>div {
+    padding: 3px 0;
+
+}
+
+.age {
+    font-size: 16px;
+    margin-bottom: 1rem;
+}
+
+.name {
+    font-size: 24px;
+}
+
+.bold {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.name>.bold {
+    margin-right: 0;
+}
+
+#overview-text i {
+    font-size: 20px;
+}
+
+.close {
+    background-color: rgb(251, 70, 69);
+    line-height: 12px;
+}
+
+.minimize {
+    background-color: rgb(252, 175, 36);
+}
+
+.hover-text {
+    height: 5px !important;
+    width: 5px !important;
+    line-height: 5px !important;
+    visibility: hidden;
+    font-weight: 900;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#terminal-top-left:hover .hover-text,
+#about-me-top-left:hover .hover-text {
+    visibility: visible;
+    cursor: pointer;
+}
+
+.disabled-hover {
+    pointer-events: none;
+}
+
+.expand {
+    background-color: rgb(40, 193, 49);
+}
+
+.disabled-button {
+    background-color: rgb(80, 75, 87);
+}
+
+
+#date-time>span {
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+#terminal-content,
+#about-me-content,
+#work-content {
+    padding: 3px;
+    font-size: 12px;
+    font-family: 'SF Mono', SFMono-Regular, ui-monospace,
+        'DejaVu Sans Mono', Menlo, Consolas, monospace;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    display: none;
+
+}
+
+#terminal-content {
+    display: block;
+    width: calc(100% - 6px);
+    font-size: 14px;
+}
+
+#work-content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+
+
+}
+
+.work-period {
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 2rem;
+    width: 250px;
+}
+
+.company {
+    display: inline-block;
+    white-space: auto;
+    overflow-wrap: break-word;
+}
+
+#work-experience-content,
+#education-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+
+#education-content,
+#hobbies-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    display: none;
+}
+
+.study,
+.graduationYear,
+.university,
+.hobby {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.study {
+    font-weight: bold;
+}
+
+#education-content img,
+#education-content i,
+.hobby>img {
+    width: 40px;
+    font-size: 40px;
+    padding-right: 2rem;
+}
+
+#work-experience-content>div {
+    margin: 2rem 0;
+}
+
+.position {
+    display: inline-block;
+    width: 200px;
+    padding: 0 2rem;
+}
+
+
+#about-me-content.active,
+#work-content.active,
+#education-content.active,
+#hobbies-content.active {
+    display: flex;
+}
+
+/* #work-experience-content>div {
+    display: flex;
+    justify-content: space-around;
+
+} */
+
+td,
+th {
+    text-align: left;
+    padding: 1rem;
+    vertical-align: text-top;
+}
+
+table {
+    padding: 2rem;
+}
+
+
+#about-me-content,
+#work-content {
+    padding: 0;
+}
+
+.terminal-input {
+    height: 14px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'SF Mono', SFMono-Regular, ui-monospace,
+        'DejaVu Sans Mono', Menlo, Consolas, monospace;
+    background-color: rgb(23, 23, 23);
+    color: white;
+    font-size: 14px;
+    display: inline-block;
+    width: calc(100% - 40px);
+}
+
+
+.terminal-input:focus {
+    outline: none;
+}
+
+#apple-icon {
+    padding: 3px 10px;
+}
+
+#app-name-dropdown,
+#apple-icon-dropdown {
+    position: absolute;
+    font-weight: normal;
+    white-space: nowrap;
+    padding: 5px;
+    background-color: rgb(44, 39, 52);
+    border: 1px rgb(100, 100, 100) solid;
+    margin-top: 3px;
+    border-radius: 5px;
+    visibility: hidden;
+    display: none;
+}
+
+#app-name-dropdown>div,
+#apple-icon-dropdown>div {
+    padding: 3px 15px;
+    border-radius: 5px;
+}
+
+#app-name-dropdown>hr,
+#apple-icon-dropdown>hr {
+    border-top: 0;
+    margin: 3px 0;
+}
+
+#app-name-dropdown>div:hover,
+#apple-icon-dropdown>div:hover {
+    background-color: rgb(28, 92, 188);
+}
+
+#app-name-dropdown.active,
+#apple-icon-dropdown.active {
+    z-index: 2;
+    visibility: visible;
+    display: flex;
+    flex-direction: column;
+}
+
+#apple-icon-dropdown.active {
+    left: 5px;
+}
+
+#app-name #app-name-display.active,
+#apple-icon.active {
+    background-color: #9e9d9d70;
+}
+
+
+/* Hide top bar icons at different screen sizes */
+@media only screen and (max-width: 500px) {
+    #dock>div:not(#finder-icon, #safari-icon, #terminal-icon) {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #top-bar-left>div:not(#apple-icon, #app-name) {
+        display: none;
+    }
+
+    #top-bar-right>div:not(#date-time) {
+        display: none;
+    }
+
+
+}
+
+@media only screen and (max-width: 800px) {
+    #terminal-window-name {
+        visibility: hidden;
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+    #about-me-app {
+        width: 90vw;
+    }
+}
+
+
+.terminalStringOutput {
+    color: green;
+}
+
+.terminalNumberOutput {
+    color: rgb(160, 160, 2);
+}
+
+
+/* Dock icons hover */
+#finder-icon::before {
+    content: 'Finder';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+    width: fit-content;
+    height: 20px;
+    color: white;
+    left: -1%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+#safari-icon::before {
+    content: 'Safari';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+    width: fit-content;
+    color: white;
+    z-index: 1;
+    visibility: hidden;
+}
+
+#game-icon::before {
+    content: 'Game of Life';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+    width: 95px;
+    color: white;
+    left: -50%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+#system-icon::before {
+    content: 'System Preferences';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+    width: 145px;
+    color: white;
+    left: -75%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+#keynote-icon::before {
+    content: 'Keynote';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+
+    height: 20px;
+    color: white;
+    left: -10%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+#textedit-icon::before {
+    content: 'TextEdit';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+    height: 20px;
+    color: white;
+    left: -10%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+#terminal-icon::before {
+    content: 'Terminal';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 5px;
+    bottom: 57px;
+
+    height: 20px;
+    color: white;
+    left: -10%;
+    z-index: 1;
+    visibility: hidden;
+}
+
+/* #finder-icon::after {
+    content: '';
+    position: absolute;
+    background-color: rgb(40, 47, 54);
+    border: 1px black solid;
+    border-radius: 6px;
+    transform: rotateZ(45deg);
+    width: 20px;
+    height: 20px;
+    left: 18.5px;
+    bottom: 55px;
+    visibility: hidden;
+} */
+
+#finder-icon:hover#finder-icon::before,
+#safari-icon:hover#safari-icon::before,
+#game-icon:hover#game-icon::before,
+#system-icon:hover#system-icon::before,
+#keynote-icon:hover#keynote-icon::before,
+#textedit-icon:hover#textedit-icon::before,
+#terminal-icon:hover#terminal-icon::before {
+    visibility: visible;
+}

@@ -5,12 +5,12 @@ const loadingScreen = document.querySelector('#loading-screen')
 const bootUpScreen = document.querySelector('#bootup-screen')
 
 
-let bootTime = 10000 // milliseconds
+let bootTime = 5000 // milliseconds
 const playSoundDelay = bootTime / 10 // milliseconds
 
 // DEBUGGING USE
-let playAudio = false // Set false to mute boot up sound
-bootTime = 1 // Set to 1 to speed up boot time
+let playAudio = true // Set false to mute boot up sound
+// bootTime = 1 // Set to 1 to speed up boot time
 // DEBUGGING USE
 
 powerUp.addEventListener('click', function bootUpFunction() {
